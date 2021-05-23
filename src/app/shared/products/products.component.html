@@ -1,0 +1,222 @@
+<!-- <form class=""> -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="dateOfBirth">Date of birth</label>
+          <div class="input-group">
+            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+  </ng-template>
+  
+  <button class="btn btn-lg btn-outline-primary" (click)="createNewProduct()">Launch demo modal</button>
+  
+<input
+  class="form-control mr-sm-2 form-inline my-6 my-lg-2 search-area"
+  type="search"
+  placeholder="Search"
+  [(ngModel)]="searchString"
+  aria-label="Search"
+/>
+<!-- </form> -->
+<ng-sidebar-container style="height: 100vh;">
+  <div ng-sidebar-content>
+    <!-- <button
+      class="hamburger button btn btn-light"
+      color="primary"
+      aria-label="Example icon button with a menu icon"
+      (click)="toggleSidebar()"
+    >
+      <span class="material-icons">menu</span>
+    </button> -->
+
+    <div class="row">
+      <div class="col-md-2" *ngFor="let i of searchProducts" style="padding: 40px;">
+        <div class="product-grid">
+          <div>
+            <div class="product-image">
+              <div class="product-image">
+                <a (click)="open(content)" class="image">
+                  <img
+                    class="pic-1 table_custom container card"
+                    src="{{ i.imageUrl }}"
+                  />
+                </a>
+                <ul class="product-links bi bi-cart">
+                  <li class="bi bi-cart">
+                    <a (click)="open(content)">ADD</a>
+                  </li>
+                </ul>
+              </div>
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">
+                    {{ "PRODUCT.ADD" | translate }}
+                  </h4>
+                  <button
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                    (click)="modal.dismiss('Cross click')"
+                  >
+                    <span aria-hidden="true">
+                      {{ "PRODUCT.CLOSE" | translate }}
+                    </span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="dateOfBirth"> </label>
+                      <h4 class="popup-heading">{{ i.category }}</h4>
+                      <div class="input-group">
+                        <img src="{{ i.imageUrl }}" class="image_popup" />
+                        <span class="popup-content">
+                          <b>{{ "PRODUCT.CODE" | translate }}</b> : {{ i.id
+                          }}<br />
+                          <b>{{ "PRODUCT.PRICE" | translate }}</b> :
+                          {{ i.price | currency: "INR" }} <br />
+                          <b>{{ "PRODUCT.NAME" | translate }}</b> : {{ i.name
+                          }}<br />
+                          <b>{{ "PRODUCT.DESCRIPTION" | translate }}</b> :
+                          {{ i.description }}
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark"
+                    (click)="modal.close(i)"
+                  >
+                    {{ "PRODUCT.ADD" | translate }}
+                  </button>
+                </div>
+              </ng-template>
+            </div>
+            <div class="product-content">
+              <h3 class="title">{{ i.name }}</h3>
+              <h3 class="title">{{ i.description }}</h3>
+              <div class="price">{{ i.price | currency: "INR" }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div></div>
+      <!-- <ng-sidebar
+        [(opened)]="opened"
+        mode="push"
+        class="ng-sidebar-custom1"
+        style="padding-bottom: 10%"
+      >
+        <div class="ng-sidebar-custom text-custom" style="height: fit-content">
+          <div class="text">
+            <form
+              class="text body cursor back-custom"
+              (ngSubmit)="search()"
+              [formGroup]="searchForm"
+            >
+              <label class="navigation-bar text-custom">{{
+                "SIDE.RANGE" | translate
+              }}</label
+              ><br />
+              <div class="form-check custom-radio-input text">
+                <div class="radio text">
+                  <label
+                    ><input
+                      type="radio"
+                      name="priceRange"
+                      formControlName="priceRange"
+                      value="less"
+                      id="flexRadioDefault1"
+                    />{{ "SIDE.LESS" | translate }}</label
+                  >
+                </div>
+                <div class="radio text">
+                  <label class="text"
+                    ><input
+                      type="radio"
+                      name="priceRange"
+                      formControlName="priceRange"
+                      value="mid"
+                    />{{ "SIDE.BETWEEN" | translate }}</label
+                  >
+                </div>
+                <div class="radio text">
+                  <label
+                    ><input
+                      type="radio"
+                      name="priceRange"
+                      formControlName="priceRange"
+                      value="high"
+                    />{{ "SIDE.HIGH" | translate }}</label
+                  >
+                </div>
+              </div>
+              <div class="form-check custom-radio-input text text-custom">
+                <br /><br />
+                <label class="navigation-bar text">{{
+                  "SIDE.CATEGORY" | translate
+                }}</label
+                ><br /><br />
+                <div class="radio text">
+                  <label
+                    ><input
+                      type="radio"
+                      name="categories"
+                      formControlName="categories"
+                      value="Men"
+                    />{{ "SIDE.MALE" | translate }}</label
+                  >
+                </div>
+                <div class="radio text">
+                  <label
+                    ><input
+                      type="radio"
+                      name="categories"
+                      formControlName="categories"
+                      value="Women"
+                    />{{ "SIDE.WOMAN" | translate }}</label
+                  >
+                </div>
+                <div class="radio text">
+                  <label
+                    ><input
+                      type="radio"
+                      name="categories"
+                      formControlName="categories"
+                      value="Footwear"
+                    />{{ "SIDE.FOOT" | translate }}</label
+                  >
+                </div>
+                <br /><br /><br /><br /><br />
+              </div>
+
+              <button type="submit" class="submit-button btn btn-light">
+                {{ "SIDE.SEARCH" | translate }}
+              </button>
+            </form>
+          </div>
+        </div>
+      </ng-sidebar> -->
+    </div>
+  </div></ng-sidebar-container
+>

@@ -1,0 +1,30 @@
+<div interval="5000">
+  <ngb-carousel>
+    <ng-template ngbSlide *ngFor="let product of product">
+      <div class="picsum-img-wrapper">
+        <img
+          src="{{ product.imageUrl }}"
+          alt="Random first slide"
+          class="picsum-img-slidder"
+        />
+      </div>
+      <div class="carousel-caption">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <div class="fluid-container foot-image">
+    <span>
+      <div class="first-div">
+        <h1 class="h1-responsive font-weight-bold" style="color: white">
+          {{ "MAIN.TITLE" | translate }}
+        </h1>
+        <p class="h5-responsive offer text-size" style="color: white">
+          {{ "MAIN.TITLE2" | translate }}
+        </p>
+      </div>
+      <div class="mt-5"><br /><br /><br /><br /></div>
+    </span>
+  </div>
+</div>

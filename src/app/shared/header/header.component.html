@@ -1,0 +1,67 @@
+<div style="background-color: #002f5f; color: white">
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" routerLink="products">{{ "MAIN.TITLE" | translate }}</a>
+
+    <div
+      class="collapse navbar-collapse"
+      style="color: white"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item">
+          <a class="nav-link navbar-color" routerLink="home"
+            >{{ "MAIN.HOME" | translate }}
+            <span class="sr-only">(current)</span></a
+          >
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link navbar-color" routerLink="products">{{
+            "MAIN.PRODUCTS" | translate
+          }}</a>
+        </li> -->
+        <!-- <a class="nav-link navbar-color" routerLink="cart">{{
+            "MAIN.CART" | translate
+          }}</a>
+        </li> -->
+        <!-- <li class="nav-item" style="padding-top: 8px">
+          <label class="nav-link navbar-color d-inline">Language:</label>
+          <select #lang (change)="changeLanguage(lang.value)">
+            <option class="nav-link" value="en">English</option>
+            <option class="nav-link" value="hi">Hindi</option>
+          </select>
+        </li> -->
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <!-- <i class="fa badge" style="font-size: 24px" value="5">&#xf07a;</i> -->
+        <!-- <i class="fa badge" style="font-size: 24px">&#xf07a;5</i> -->
+        <span *ngIf="userName" class="cart-custom">
+          <i class="fa" style="font-size: 24px" routerLink="cart">&#xf07a;</i>
+          <span class="cart" id="lblCartCount"> {{ cartLength }} </span>
+        </span>
+
+        <div *ngIf="userName">
+          <label class="my-2 my-sm-0 navbar-color"
+            >{{ "MAIN.WELCOME" | translate }} {{ userName }}
+          </label>
+        </div>
+        <button
+          *ngIf="userName"
+          class="btn btn-outline border my-2 my-sm-0 navbar-color"
+          (click)="logout()"
+        >
+          {{ "MAIN.LOGOUT" | translate }}
+        </button>
+        <div *ngIf="!userName">
+          <a routerLink="login">
+            <button
+              class="btn btn-outline-success border danger my-2 my-sm-0 navbar-color"
+              type="submit"
+            >
+              {{ "MAIN.LOGIN" | translate }}
+            </button>
+          </a>
+        </div>
+      </form>
+    </div>
+  </nav>
+</div>
